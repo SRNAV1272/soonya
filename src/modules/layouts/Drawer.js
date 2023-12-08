@@ -6,10 +6,11 @@ import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
 import Navlink from '../common/NavLinks';
 import { Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function SwipeableTemporaryDrawer() {
     const [state, setState] = React.useState(false);
-
+    const navigate = useNavigate()
     const list = (anchor) => (
         <Box
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, p: 2 }}
@@ -35,6 +36,7 @@ export default function SwipeableTemporaryDrawer() {
                     py={1}
                     px={2}
                     borderRadius={'20px'}
+                    onClick={() => navigate('/signin')}
                 >
                     <Typography
                         fontFamily={'Source Code Pro'}

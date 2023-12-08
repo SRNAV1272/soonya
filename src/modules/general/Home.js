@@ -16,7 +16,6 @@ export default function Home() {
                     display={'flex'}
                     justifyContent={'center'}
                     alignItems={'center'}
-                    // p={2}
                     order={window.innerWidth < 1200 ? 2 : 1}
                 >
                     <Box
@@ -138,8 +137,8 @@ export default function Home() {
                                     xs={12}
                                     md={5}
                                     lg={4}
-                                    pt={4}
-                                    spacing={2}
+                                    mt={2}
+                                    rowSpacing={2}
                                     p={window.innerWidth > 1024 && 2}
                                 >
                                     <MediaCard key={id} data={data} />

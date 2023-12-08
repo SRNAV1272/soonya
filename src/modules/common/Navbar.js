@@ -15,7 +15,7 @@ export default function Navbar() {
                 component={Paper}
                 elevation={0}
                 sx={{
-                    boxShadow: '1px 1px 10px 10px #F2F2F4',
+                    // boxShadow: '1px 1px 10px 10px #F2F2F4',
                     borderRadius: '12px',
                 }}
                 p={2}
