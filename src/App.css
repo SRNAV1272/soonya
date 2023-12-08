@@ -19,3 +19,25 @@
 body {
   background-color: #FCFCFE;
 }
+
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: #407587 #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* *::-webkit-scrollbar-thumb {
+  background-color: #407587;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}  */

@@ -1,10 +1,11 @@
-import { Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { Box, Grid, Paper, Typography } from "@mui/material";
 import SwipeableTemporaryDrawer from "../layouts/Drawer";
 import Navlink from "./NavLinks";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Navbar() {
-
+    const navigate = useNavigate()
     return (
         <>
             <Grid
@@ -14,8 +15,8 @@ export default function Navbar() {
                 component={Paper}
                 elevation={0}
                 sx={{
-                    boxShadow: '2px 2px 20px 20px #F2F2F4',
-                    borderRadius: '12px'
+                    boxShadow: '1px 1px 10px 10px #F2F2F4',
+                    borderRadius: '12px',
                 }}
                 p={2}
             >
@@ -23,28 +24,28 @@ export default function Navbar() {
                     item
                     sm={2}
                 >
-                    <Typography fontFamily={'Nova Square'} color="#EEC515">Soonya</Typography>
+                    <Typography fontFamily={'Wishper'} onClick={() => navigate('/')} sx={{ cursor: 'pointer' }} color="#EEC515">Soonya</Typography>
                 </Grid>
                 {
                     window.innerWidth < 860 ?
-                    <>
-                        <Grid
-                            item
-                            sm={8}
-                            display={'flex'}
-                            justifyContent={'end'}
-                        >
-                            <SwipeableTemporaryDrawer />
-                        </Grid>
-                    </>
-                        
+                        <>
+                            <Grid
+                                item
+                                sm={8}
+                                display={'flex'}
+                                justifyContent={'end'}
+                            >
+                                <SwipeableTemporaryDrawer />
+                            </Grid>
+                        </>
+
                         :
                         <>
                             <Grid
                                 item
                                 sm={8}
                                 display={'flex'}
-                                justifyContent={'space-around'}
+                                justifyContent={'end'}
                                 alignItems={'center'}
                             >
                                 <Navlink />
@@ -63,6 +64,7 @@ export default function Navbar() {
                                     py={1}
                                     px={2}
                                     borderRadius={'20px'}
+                                    onClick={() => navigate('/signin')}
                                 >
                                     <Typography
                                         fontFamily={'Source Code Pro'}

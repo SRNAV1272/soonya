@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 
 export default function Navlink() {
-    const links = ['Features', 'Pricing', 'About Us', 'Resources', 'Enterprise']
+    const links = ['Pricing', 'About Us']
     return (
         <>
             {
@@ -17,15 +17,16 @@ export default function Navlink() {
                                         console.log(isActive)
                                         return {
                                             textDecoration: 'none',
-                                            color: `${isActive.isActive ? 'blue' : 'grey'}`,
-                                            marginTop: `${window.innerWidth < 540 && '5px'}`
+                                            color: `${isActive.isActive ? 'blue' : '#516A8B'}`,
+                                            marginTop: `${window.innerWidth < 540 && '5px'}`,
+                                            fontWeight: '600'
                                         }
                                     }
                                 }
                                 className={"Whisper"}
                             >
                                 {item}
-                            </NavLink>
+                            </NavLink>&emsp;&emsp;
                         </>
                     )
                 })

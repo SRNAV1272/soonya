@@ -4,7 +4,6 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import Navlink from '../common/NavLinks';
 import { Typography } from '@mui/material';
 
@@ -13,22 +12,11 @@ export default function SwipeableTemporaryDrawer() {
 
     const list = (anchor) => (
         <Box
-            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250, p: 2 }}
             role="presentation"
             onClick={() => setState(!state)}
             onKeyDown={() => setState(!state)}
         >
-            <Box
-                sx={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'end'
-                }}
-            >
-                <Button onClick={() => setState(!state)}>
-                    <CloseIcon />
-                </Button>
-            </Box>
             <List
                 sx={{
                     display: 'flex',
