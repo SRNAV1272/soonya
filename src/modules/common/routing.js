@@ -5,6 +5,10 @@ import Pricing from "../general/Pricing";
 import SignIn from "../general/Signin";
 import SignUp from "../general/Signup";
 import Footer from "./Footer";
+import DashboardLayout from "../dashboard/layout/Layout";
+import Content from "../dashboard/pages/Content";
+import Design from "../dashboard/pages/Design";
+import QrCode from "../dashboard/qrcode/QrCode";
 
 export const routes = [
     {
@@ -61,6 +65,27 @@ export const routes = [
             {
                 path: '',
                 element: <SignUp />
+            }
+        ]
+    },
+    {
+        path: 'dashboard',
+        element:
+            <DashboardLayout>
+                <Outlet />
+            </DashboardLayout>,
+        children: [
+            {
+                path: 'content',
+                element: <Content />
+            },
+            {
+                path: 'design',
+                element: <Design />
+            },
+            {
+                path: 'qrcode',
+                element: <QrCode />
             }
         ]
     }

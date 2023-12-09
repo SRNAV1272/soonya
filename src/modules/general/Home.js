@@ -1,9 +1,11 @@
 import { Box, Grid, Typography } from "@mui/material";
 import tem1 from '../../images/card_home_plate.jpg'
 import MediaCard from "../common/Card";
+import QrCode from "../dashboard/qrcode/QrCode";
+import { h1 } from "../sizes/Sizes";
+import React from "react";
 
 export default function Home() {
-
     return (
         <>
             <Grid
@@ -19,7 +21,7 @@ export default function Home() {
                     order={window.innerWidth < 1200 ? 2 : 1}
                 >
                     <Box
-                        width={'60%'}
+                        p={2}
                     >
                         <Typography
                             fontFamily={'Space Grotesk'}
@@ -32,17 +34,16 @@ export default function Home() {
                         <Typography
                             fontFamily={'Montserrat'}
                             fontWeight={'600'}
-                            variant="h4"
-                            display={window.innerWidth < 425 ? 'none' : 'block'}
+                            fontSize={h1}
                             pb={3}
                         >
                             Future of Networking with &nbsp;
                             <span
                                 style={{
-                                    color: '#1749DF'
+                                    color: '#5FE0E5',
                                 }}
                             >
-                                Soonya
+                                tapwave
                             </span> &nbsp;
                             Smart Digital Business Card
                         </Typography>
@@ -74,6 +75,16 @@ export default function Home() {
             </Grid>
             <Grid
                 container
+            >
+                <Grid
+                    item
+                    xs={12}
+                >
+                    <QrCode />
+                </Grid>
+            </Grid>
+            <Grid
+                container
                 justifyContent={'space-around'}
                 px={5}
                 py={5}
@@ -89,7 +100,16 @@ export default function Home() {
                         color={'#888888'}
                         variant="p"
                     >
-                        HOW Soonya WORKS :-
+                        HOW
+                        &nbsp;
+                        <span
+                            style={{
+                                color: '#5FE0E5',
+                            }}
+                        >
+                            tapwave
+                        </span> &nbsp;
+                        WORKS :-
                     </Typography>
                 </Grid>
                 <Grid
@@ -103,10 +123,18 @@ export default function Home() {
                             fontFamily={'Montserrat'}
                             fontWeight={'500'}
                             color={'#486284'}
-                            fontSize={30}
-                            display={window.innerWidth < 425 ? 'none' : 'block'}
+                            // fontSize={30}
+                            fontSize={h1 / 1.2}
                         >
-                            Soonya Allows You to Create, Exchange, Store & Organize Your Business Contacts Without Any Hassles.
+                            &nbsp;
+                            <span
+                                style={{
+                                    color: '#5FE0E5',
+                                }}
+                            >
+                                tapwave
+                            </span> &nbsp;
+                            Allows You to Create, Exchange, Store & Organize Your Business Contacts Without Any Hassles.
                         </Typography>
                     </Box>
                 </Grid>
@@ -116,12 +144,12 @@ export default function Home() {
                         {
                             url: 'https://assets-global.website-files.com/64f2f28d9c0d653c3c8afe27/6540b5034c775eb025ba1ca5_home.svg',
                             title: 'Your Phone = Your Business Card',
-                            description: 'Much like printed cards, you have to constantly carry your NFC card everywhere (phew!). But your Soonya Card is always with you on your phone.'
+                            description: 'Much like printed cards, you have to constantly carry your NFC card everywhere (phew!). But your tapwave Card is always with you on your phone.'
                         },
                         {
                             url: 'https://assets-global.website-files.com/64f2f28d9c0d653c3c8afe27/653f9db076acfe5e5f8cc93e_element-banner-03-1-min.png',
                             title: 'Save, Segment, and Organise Your Contacts',
-                            description: 'Soonya Digital Card is paired with a comprehensive contact management software while your NFC card is…just a card.'
+                            description: 'tapwave Digital Card is paired with a comprehensive contact management software while your NFC card is…just a card.'
                         },
                         {
                             url: 'https://assets-global.website-files.com/64f2f28d9c0d653c3c8afe27/6549cbf5e2f2e8a845ea40a9_cost-effewctive%20(1).svg',

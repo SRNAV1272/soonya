@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { heightLogo } from '../sizes/Sizes';
+import logo from '../../images/Tapwave.png'
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -31,7 +33,24 @@ export default function SignUp() {
         <ThemeProvider theme={defaultTheme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
-                <Typography fontFamily='Questrial' fontWeight='600' variant='h3' textAlign={'center'} py={3}>Soonya</Typography>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <img
+                        height={heightLogo * 2}
+                        src={logo}
+                        style={{
+                            cursor: 'pointer',
+                            textAlign: 'center'
+                        }}
+                        alt='logo'
+                        onClick={() => navigate('/')}
+                    />
+                </Box>
                 <Box
                     sx={{
                         display: 'flex',

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { h1 } from '../sizes/Sizes';
 
 export default function MediaCard(props) {
     const { key, data } = props
@@ -21,10 +22,10 @@ export default function MediaCard(props) {
             <CardContent>
                 <Typography
                     gutterBottom
-                    variant="h5"
                     component="div"
                     fontFamily={'Space Grotesk'}
                     fontWeight={'600'}
+                    fontSize={h1/1.3}
                 >
                     {data?.title}
                 </Typography>
