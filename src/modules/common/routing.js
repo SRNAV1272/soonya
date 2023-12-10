@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import DashboardLayout from "../dashboard/layout/Layout";
 import Content from "../dashboard/pages/Content";
 import Design from "../dashboard/pages/Design";
-import QrCode from "../dashboard/qrcode/QrCode";
+import Cards from "../dashboard/pages/Cards";
 
 export const routes = [
     {
@@ -82,11 +82,11 @@ export const routes = [
             {
                 path: 'design',
                 element: <Design />
-            },
-            {
-                path: 'qrcode',
-                element: <QrCode />
             }
         ]
+    },
+    {
+        path: 'dashboard/preview',
+        element: <Cards />
     }
 ]

@@ -1,12 +1,16 @@
 import './App.css';
 import { BrowserRouter } from 'react-router-dom';
 import Layout from './modules/common/Layout';
+import { Provider } from 'react-redux';
+import { store } from './modules/reducer/Store';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+    <Provider store={store} >
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
+    </Provider>
   );
 }
 
