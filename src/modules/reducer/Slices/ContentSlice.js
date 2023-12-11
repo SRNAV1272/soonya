@@ -4,7 +4,8 @@ import axios from 'axios'
 import { url } from "../../sizes/Sizes"
 
 const initialState = {
-    name: 'Client'
+    name: 'Client',
+    url: 'https://tapewave.co.in/'
 }
 
 export const GetData = createAsyncThunk(
@@ -39,6 +40,12 @@ export const ContentSlice = createSlice({
                 ...state,
                 ...action.payload
             }
+        },
+        URLUpdate: (state, action) => {
+            return {
+                ...state,
+                ...action.payload
+            }
         }
     },
     extraReducers(builder) {
@@ -53,5 +60,5 @@ export const ContentSlice = createSlice({
     }
 })
 
-export const { ContentUpdate } = ContentSlice.actions
+export const { ContentUpdate, URLUpdate } = ContentSlice.actions
 export default ContentSlice.reducer

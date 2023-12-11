@@ -42,6 +42,10 @@ export default function BasicAccordion() {
         dispatch(ContentUpdate(data))
     }
 
+    function Save() {
+
+    }
+
     return (
         <div>
             <Box
@@ -61,6 +65,12 @@ export default function BasicAccordion() {
                     onClick={() => Update()}
                 >
                     Update
+                </Button>&emsp;
+                <Button
+                    variant='contained'
+                    onClick={() => Save()}
+                >
+                    Save
                 </Button>
             </Box>
             <Accordion>

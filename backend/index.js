@@ -70,6 +70,7 @@ async function Auth(req, res, next) {
 app.listen(port, () => {
     console.log(`Server is Listening at port ${port} !`)
 })
+
 const global_routes = [
     '/',
     '/dashboard/content',
