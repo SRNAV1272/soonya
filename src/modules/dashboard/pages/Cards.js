@@ -96,7 +96,7 @@ export default function Cards() {
                             <Grid
                                 item
                                 xs={12}
-                                md={6}
+                                md={4}
                                 display={'flex'}
                                 flexDirection={'column'}
                                 justifyContent={'center'}
@@ -118,7 +118,7 @@ export default function Cards() {
                             <Grid
                                 item
                                 xs={12}
-                                md={6}
+                                md={8}
                                 display={'flex'}
                                 flexDirection={'column'}
                                 justifyContent={'center'}

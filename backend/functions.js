@@ -4,15 +4,16 @@ export async function Login(db, phone_no, password) {
             phone_no: phone_no,
             password: password
         }).toArray()
-
         if (data?.length > 0)
-            return true
+            return {
+                login: true,
+                name: `${data[0]?.firstName + ' ' + data[0]?.lastName}`
+            }
         else
-            return false
+            return { login: false }
 
     } catch (e) {
-        console.error(e)
-        return false
+        return { login: false }
     }
 }
 
@@ -28,7 +29,6 @@ export async function PhoneNumberExists(db, phone_no) {
             return false
 
     } catch (e) {
-        console.error(e)
         return false
     }
 }
@@ -54,7 +54,6 @@ export async function VerifyOTP(db, OTP) {
         }).toArray()
 
         if (data?.length > 0) {
-            console.log(data[0])
             try {
                 await db.collection('auth').insertOne({
                     firstName: data[0]?.firstName,

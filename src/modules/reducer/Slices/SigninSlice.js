@@ -5,7 +5,7 @@ import axios from 'axios'
 import { url } from "../../sizes/Sizes";
 
 const initialState = {
-
+    name: 'Client'
 }
 
 export const Login = createAsyncThunk(
@@ -14,13 +14,18 @@ export const Login = createAsyncThunk(
         try {
             dispatch(Load(true))
             const response = await axios.post(`${url}/login`, data)
-            console.log(response.data)
-            dispatch(Load(false))
-
+            if (response.data?.msg === "Login Successful !") {
+                localStorage.setItem('token', response.data?.jwtoken)
+                dispatch(Notify({ msg: response.data?.msg }))
+                navigate('/dashboard/content')
+                dispatch(Load(false))
+                return {
+                    name: response.data?.name
+                }
+            }
         } catch (e) {
-            console.error(e)
             dispatch(Load(false))
-            dispatch(Notify({ msg: 'Technical Error ! Please Try Again !' }))
+            dispatch(Notify({ msg: e.response.data.msg ? e.response.data.msg : 'Technical Error ! Please Try Again !' }))
         }
     }
 )
@@ -30,15 +35,14 @@ export const SigninSlice = createSlice({
     initialState,
     extraReducers(builder) {
         builder
-            .addCase(Login.pending, (state, action) => {
-
-            })
+            .addCase(Login.pending, (state, action) => { })
             .addCase(Login.fulfilled, (state, action) => {
-
+                return {
+                    ...state,
+                    ...action.payload
+                }
             })
-            .addCase(Login.rejected, (state, action) => {
-
-            })
+            .addCase(Login.rejected, (state, action) => { })
     }
 })
 

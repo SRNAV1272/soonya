@@ -1,7 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
+import { Load } from "./LoadingSlice"
+import axios from 'axios'
+import { url } from "../../sizes/Sizes"
 
 const initialState = {
+    name: 'Client'
 }
+
+export const GetData = createAsyncThunk(
+    "Content/GetData",
+    // eslint-disable-next-line
+    async ({ }, { dispatch }) => {
+        try {
+            dispatch(Load(true))
+
+            const response = await axios.get(
+                `${url}/dashboard`,
+                {
+                    headers: {
+                        Authorization: `${localStorage.getItem('token')}`
+                    }
+                }
+            )
+            dispatch(Load(false))
+            return (response.data)
+        } catch (e) {
+            dispatch(Load(false))
+        }
+    }
+)
 
 export const ContentSlice = createSlice({
     name: 'Content',
@@ -13,6 +40,16 @@ export const ContentSlice = createSlice({
                 ...action.payload
             }
         }
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(GetData.pending, (state, action) => { })
+            .addCase(GetData.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
     }
 })
 

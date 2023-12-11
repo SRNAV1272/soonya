@@ -7,11 +7,13 @@ import { useDispatch } from 'react-redux';
 import logo, { heightLogo } from '../../sizes/Sizes';
 import { Notify } from '../../reducer/Slices/Notification';
 import { PostOTP } from '../../reducer/Slices/SignupSlice';
+import { useNavigate } from 'react-router-dom';
 
 const defaultTheme = createTheme();
 
 export default function OTP() {
     const [otp, setOtp] = useState('');
+    const navigate = useNavigate()
     const handleChange = (event) => {
         setOtp(event);
     };
@@ -21,7 +23,7 @@ export default function OTP() {
         const data = new FormData();
         data.set('OTP', otp)
         if (otp.length < 5) { dispatch(Notify({ msg: 'Please Enter all the 5 Digits !' })); return }
-        dispatch(PostOTP({ data }, { dispatch }))
+        dispatch(PostOTP({ data, navigate }, { dispatch }))
     };
 
     return (

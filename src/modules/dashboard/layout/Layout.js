@@ -8,6 +8,7 @@ import React from "react";
 import Copyright from "../../common/Copyright";
 import SwipableDrawer from "./Swipable";
 import Mobile from "./Mobile";
+import { useSelector } from "react-redux";
 
 export default function DashboardLayout() {
     const navigate = useNavigate()
@@ -15,6 +16,7 @@ export default function DashboardLayout() {
         content: 0,
         design: 1,
     }
+    const { name } = useSelector(state => state.SigninReducer)
     const path = useLocation()
     const [value, setValue] = React.useState(indecies[path.pathname.split('/')[2]]);
     const handleChange = (event, newValue) => {
@@ -27,7 +29,8 @@ export default function DashboardLayout() {
         };
     }
     function Logout() {
-        navigate('/')
+        localStorage.clear('token')
+        navigate('/signin')
     }
     return (
         <>
@@ -94,7 +97,7 @@ export default function DashboardLayout() {
                                         p: 1
                                     }}
                                 >
-                                    a
+                                    {name?.substring(0, 2)}
                                 </Avatar>&emsp;
                                 <Typography
                                     fontFamily={'Dosis'}
