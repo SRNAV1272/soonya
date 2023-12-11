@@ -13,6 +13,9 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import { heightLogo } from '../sizes/Sizes';
 import logo from '../../images/Tapwave.png'
+import { useDispatch } from 'react-redux';
+import { Login } from '../reducer/Slices/SigninSlice';
+import { Notify } from '../reducer/Slices/Notification';
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
@@ -20,15 +23,36 @@ const defaultTheme = createTheme();
 
 export default function SignIn() {
     const navigate = useNavigate()
+    const [data, setData] = React.useState({})
+    const dispatch = useDispatch()
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        navigate('/dashboard/content')
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        if (!/^[6-9]\d{9}$/gi.test(data.get('phone_no')) || data.get('phone_no') === '') {
+            dispatch(Notify({ msg: 'Please Enter a Valid Number !' }))
+            setData(prev => {
+                return {
+                    ...prev,
+                    phone_no: ''
+                }
+            })
+            return
+        }
+        if (data.get('password') === '' || data.get('password') === undefined) { dispatch(Notify({ msg: 'Please Enter a Password !' })); return }
+
+        dispatch(Login({ data, navigate }, { dispatch }))
     };
+
+    function onChange(e) {
+        const { name, value } = e.target
+        setData(prev => {
+            return {
+                ...prev,
+                [name]: value
+            }
+        })
+    }
 
     return (
         <ThemeProvider theme={defaultTheme}>
@@ -67,24 +91,43 @@ export default function SignIn() {
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
-                            margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
-                            autoFocus
+                            type='number'
+                            id="phone_no"
+                            label="Phone Number"
+                            name="phone_no"
+                            autoComplete="phone_no"
+                            onInput={(e) => {
+                                e.target.value = Math.max(0, parseInt(e.target.value)).toString().slice(0, 10)
+                            }}
+                            sx={{
+                                "& input[type=number]": {
+                                    MozAppearance: "textfield",
+                                },
+                                "& input[type=number]::-webkit-outer-spin-button": {
+                                    WebkitAppearance: "none",
+                                    margin: 0,
+                                },
+                                "& input[type=number]::-webkit-inner-spin-button": {
+                                    WebkitAppearance: "none",
+                                    margin: 0,
+                                }
+                            }}
+                            onChange={onChange}
+                            error={data?.phone_no === '' ? true : false}
                         />
                         <TextField
-                            margin="normal"
                             required
                             fullWidth
+                            sx={{ my: 2 }}
                             name="password"
                             label="Password"
                             type="password"
                             id="password"
-                            autoComplete="current-password"
+                            autoComplete="new-password"
+                            onChange={onChange}
+                            error={data?.password === '' ? true : false}
                         />
                         <Button
                             type="submit"

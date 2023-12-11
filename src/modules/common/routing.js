@@ -9,6 +9,7 @@ import DashboardLayout from "../dashboard/layout/Layout";
 import Content from "../dashboard/pages/Content";
 import Design from "../dashboard/pages/Design";
 import Cards from "../dashboard/pages/Cards";
+import OTP from "../dashboard/pages/OTP";
 
 export const routes = [
     {
@@ -65,6 +66,19 @@ export const routes = [
             {
                 path: '',
                 element: <SignUp />
+            }
+        ]
+    },
+    {
+        path: 'otp',
+        element:
+            <Footer>
+                <Outlet />
+            </Footer>,
+        children: [
+            {
+                path: '',
+                element: <OTP />
             }
         ]
     },

@@ -31,9 +31,9 @@ export default function DesignAccordian() {
     const [data, setData] = React.useState({
         style: ''
     })
-
+    
     React.useEffect(() => {
-        dispatch(ContentUpdate(data))
+        dispatch(ContentUpdate(data)) // eslint-disable-next-line
     }, [data])
 
     return (

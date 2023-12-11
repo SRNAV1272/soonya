@@ -8,7 +8,6 @@ export const ContentSlice = createSlice({
     initialState,
     reducers: {
         ContentUpdate: (state, action) => {
-            // console.log(action.payload)
             return {
                 ...state,
                 ...action.payload
