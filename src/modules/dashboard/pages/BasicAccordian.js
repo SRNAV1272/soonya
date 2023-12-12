@@ -16,8 +16,9 @@ import FlagCircleIcon from '@mui/icons-material/FlagCircle';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import { useDispatch } from 'react-redux';
-import { ContentUpdate } from '../../reducer/Slices/ContentSlice';
+import { ContentUpdate, UploadContent } from '../../reducer/Slices/ContentSlice';
 import { useNavigate } from 'react-router-dom';
+import { Notify } from '../../reducer/Slices/Notification';
 
 export default function BasicAccordion() {
     const navigate = useNavigate()
@@ -36,14 +37,22 @@ export default function BasicAccordion() {
             }
         })
     }
-    console.log(data)
 
     function Update() {
         dispatch(ContentUpdate(data))
     }
 
     function Save() {
-
+        try {
+            const newData = new FormData()
+            Object.keys(data).forEach(item => {
+                newData.set(`${item}`, data[item])
+            })
+            dispatch(UploadContent({ newData }, { dispatch }))
+        } catch (e) {
+            console.error(e)
+            dispatch(Notify({ msg: 'Technical Error !' }))
+        }
     }
 
     return (
@@ -139,67 +148,6 @@ export default function BasicAccordion() {
                                 />
                                 <Avatar
                                     onClick={() => document.getElementById('profile').click()}
-                                    sx={{
-                                        backgroundColor: '#4D77FA',
-                                        cursor: 'pointer',
-                                        p: 1
-                                    }}
-                                >
-                                    <FileUploadIcon />
-                                </Avatar>
-                            </Box>
-                        </Grid>
-                        {
-                            window.innerWidth >= 900 &&
-                            <Divider sx={{ height: 108, }} orientation="vertical" />
-                        }
-                        <Grid
-                            item
-                            xs={12}
-                            md={5}
-                        >
-                            <Typography
-                                fontFamily={'Dosis'}
-                                fontWeight={'600'}
-                                textAlign={'center'}
-                                py={2}
-                            >
-                                Brand Logo
-                            </Typography>
-                            <Box
-                                display={'flex'}
-                                justifyContent={'center'}
-                                alignItems={'center'}
-                            >
-                                <Avatar
-                                    alt="Remy Sharp"
-                                    src={
-                                        data?.logo === null ?
-                                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEQO2ga7Jsm-619O8lg9wp5S0uZtqppyDakw&usqp=CAU"
-                                            :
-                                            data?.logo
-                                    }
-                                    sx={{ width: 56, height: 56 }}
-                                />&emsp;
-                                <input
-                                    type='file'
-                                    accept='image/*'
-                                    id='logo'
-                                    onChange={(e) => {
-                                        console.log('files =>', e.target.files[0])
-                                        setData(prev => {
-                                            return {
-                                                ...prev,
-                                                logo: URL.createObjectURL(e.target.files[0])
-                                            }
-                                        })
-                                    }}
-                                    style={{
-                                        display: 'none'
-                                    }}
-                                />
-                                <Avatar
-                                    onClick={() => document.getElementById('logo').click()}
                                     sx={{
                                         backgroundColor: '#4D77FA',
                                         cursor: 'pointer',

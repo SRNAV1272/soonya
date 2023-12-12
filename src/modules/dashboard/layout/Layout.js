@@ -4,11 +4,15 @@ import logo from '../../../images/Tapwave.png'
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import { h1 } from "../../sizes/Sizes";
-import React from "react";
+import React, { useEffect } from "react";
 import Copyright from "../../common/Copyright";
 import SwipableDrawer from "./Swipable";
 import Mobile from "./Mobile";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import StorageIcon from '@mui/icons-material/Storage';
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
+import { Notify } from "../../reducer/Slices/Notification";
+import { GetCards } from "../../reducer/Slices/ContentSlice";
 
 export default function DashboardLayout() {
     const navigate = useNavigate()
@@ -16,9 +20,21 @@ export default function DashboardLayout() {
         content: 0,
         design: 1,
     }
+    const dispatch = useDispatch()
     const { name } = useSelector(state => state.SigninReducer)
     const path = useLocation()
     const [value, setValue] = React.useState(indecies[path.pathname.split('/')[2]]);
+
+    useEffect(() => {
+        try {
+            console.log('Get Cards !')
+            dispatch(GetCards())
+        } catch (e) {
+            dispatch(Notify({ msg: e.response.data.msg }))
+        }
+    }, [])
+
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -86,10 +102,19 @@ export default function DashboardLayout() {
                                         cursor: 'pointer'
                                     }}
                                     onClick={() => navigate('/dashboard/cards')}
-                                    badgeContent={4}
+                                    badgeContent={'200kb'}
                                     color="primary"
                                 >
-                                    <CreditCardIcon color="action" />
+                                    <StorageIcon />
+                                </Badge>&emsp;&ensp;
+                                <Badge
+                                    sx={{
+                                        cursor: 'pointer'
+                                    }}
+                                    onClick={() => navigate('/dashboard/cards')}
+                                    color="primary"
+                                >
+                                    <ShoppingBagIcon color="action" />
                                 </Badge>&emsp;&emsp;&emsp;
                                 <Avatar
                                     sx={{

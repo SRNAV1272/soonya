@@ -6,6 +6,7 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, Badge, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import StorageIcon from '@mui/icons-material/Storage';
 
 export default function SwipableDrawer() {
     const [state, setState] = React.useState(false);
@@ -66,6 +67,16 @@ export default function SwipableDrawer() {
     return (
         <div>
             <React.Fragment>
+                <Badge
+                    sx={{
+                        cursor: 'pointer'
+                    }}
+                    onClick={() => navigate('/dashboard/cards')}
+                    badgeContent={'200kb'}
+                    color="primary"
+                >
+                    <StorageIcon />
+                </Badge>
                 <Button onClick={() => setState(!state)}>
                     <MenuIcon />
                 </Button>

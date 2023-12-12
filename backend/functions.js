@@ -17,6 +17,22 @@ export async function Login(db, phone_no, password) {
     }
 }
 
+export async function Exists(db, phone_no, password) {
+    try {
+        const data = await db.collection('cards').find({
+            phone_no: phone_no,
+            password: password
+        }).toArray()
+        if (data?.length > 0)
+            return true
+        else
+            return false
+
+    } catch (e) {
+        return false
+    }
+}
+
 export async function PhoneNumberExists(db, phone_no) {
     try {
         const data = await db.collection('auth').find({

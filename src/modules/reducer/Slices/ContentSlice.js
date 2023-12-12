@@ -2,31 +2,65 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { Load } from "./LoadingSlice"
 import axios from 'axios'
 import { url } from "../../sizes/Sizes"
+import { Notify } from "./Notification"
 
 const initialState = {
     name: 'Client',
     url: 'https://tapewave.co.in/'
 }
 
-export const GetData = createAsyncThunk(
-    "Content/GetData",
-    // eslint-disable-next-line
+export const UploadContent = createAsyncThunk(
+    "Content/UploadContent",
+    async ({ newData }, { dispatch }) => {
+        try {
+            dispatch(Load(true))
+            axios.post(`${url}/card_url`, newData, {
+                headers: {
+                    Authorization: `${localStorage.getItem('token')}`
+                }
+            })
+                .then(response => {
+                    dispatch(Load(false))
+                    dispatch(Notify({ msg: response.data?.msg }))
+                    console.log(response.data)
+                })
+                .catch(e => {
+                    dispatch(Notify({ msg: e.response.data?.msg }))
+                    dispatch(Load(false))
+                    console.error(e)
+                })
+        } catch (e) {
+            console.error(e)
+            dispatch(Notify({ msg: e.response.data?.msg }))
+            dispatch(Load(false))
+        }
+    }
+)
+
+export const GetCards = createAsyncThunk(
+    'Content/GetCards',
     async ({ }, { dispatch }) => {
         try {
             dispatch(Load(true))
-
-            const response = await axios.get(
-                `${url}/dashboard`,
-                {
-                    headers: {
-                        Authorization: `${localStorage.getItem('token')}`
-                    }
+            console.log('Get Cards !')
+            axios.get(`${url}/card_data`, {}, {
+                headers: {
+                    Authorization: `${localStorage.getItem('token')}`
                 }
-            )
-            dispatch(Load(false))
-            return (response.data)
+            })
+                .then(response => {
+                    console.log(response.data)
+                    dispatch(Load(false))
+                })
+                .catch(error => {
+                    dispatch(Load(false))
+                    dispatch(Notify({ msg: error.response.data.msg }))
+                })
+
         } catch (e) {
+            console.error(e)
             dispatch(Load(false))
+            dispatch(Notify({ msg: e.response.data.msg }))
         }
     }
 )
@@ -50,8 +84,8 @@ export const ContentSlice = createSlice({
     },
     extraReducers(builder) {
         builder
-            .addCase(GetData.pending, (state, action) => { })
-            .addCase(GetData.fulfilled, (state, action) => {
+            .addCase(UploadContent.pending, (state, action) => { })
+            .addCase(UploadContent.fulfilled, (state, action) => {
                 return {
                     ...state,
                     ...action.payload
