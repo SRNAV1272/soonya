@@ -227,7 +227,12 @@ app.get('/card_data', Auth, async (req, res) => {
         const { phone_no, password } = req
         const card = await db.collection('cards').find({ phone_no, password }).toArray()
 
-        console.log(card)
+        if (card.length > 0) {
+            res.send(card)
+        } else {
+            res.status(500)
+            res.send({ msg: 'Server Error !' })
+        }
 
     } catch (e) {
         console.error(e)

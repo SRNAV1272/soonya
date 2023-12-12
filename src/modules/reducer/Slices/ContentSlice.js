@@ -38,29 +38,24 @@ export const UploadContent = createAsyncThunk(
 )
 
 export const GetCards = createAsyncThunk(
-    'Content/GetCards',
+    "Content/GetCards",
+    // eslint-disable-next-line
     async ({ }, { dispatch }) => {
         try {
             dispatch(Load(true))
-            console.log('Get Cards !')
-            axios.get(`${url}/card_data`, {}, {
+            const response = await axios.get(`${url}/card_data`, {
                 headers: {
                     Authorization: `${localStorage.getItem('token')}`
                 }
             })
-                .then(response => {
-                    console.log(response.data)
-                    dispatch(Load(false))
-                })
-                .catch(error => {
-                    dispatch(Load(false))
-                    dispatch(Notify({ msg: error.response.data.msg }))
-                })
+
+            dispatch(Load(false))
+            return (response.data[0])
 
         } catch (e) {
             console.error(e)
+            dispatch(Notify({ msg: e.response.data?.msg }))
             dispatch(Load(false))
-            dispatch(Notify({ msg: e.response.data.msg }))
         }
     }
 )
@@ -86,6 +81,15 @@ export const ContentSlice = createSlice({
         builder
             .addCase(UploadContent.pending, (state, action) => { })
             .addCase(UploadContent.fulfilled, (state, action) => {
+                return {
+                    ...state,
+                    ...action.payload
+                }
+            })
+            .addCase(GetCards.pending, (state, action) => {
+                console.log(action.payload)
+            })
+            .addCase(GetCards.fulfilled, (state, action) => {
                 return {
                     ...state,
                     ...action.payload

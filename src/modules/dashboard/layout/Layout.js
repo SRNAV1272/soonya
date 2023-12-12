@@ -28,11 +28,13 @@ export default function DashboardLayout() {
     useEffect(() => {
         try {
             console.log('Get Cards !')
-            dispatch(GetCards())
+            // eslint-disable-next-line
+            dispatch(GetCards({}, { dispatch }))
         } catch (e) {
+            // eslint-disable-next-line
             dispatch(Notify({ msg: e.response.data.msg }))
         }
-    }, [])
+    }, [dispatch])
 
 
     const handleChange = (event, newValue) => {

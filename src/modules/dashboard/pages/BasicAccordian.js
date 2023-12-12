@@ -15,19 +15,19 @@ import EmailIcon from '@mui/icons-material/Email';
 import FlagCircleIcon from '@mui/icons-material/FlagCircle';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { ContentUpdate, UploadContent } from '../../reducer/Slices/ContentSlice';
 import { useNavigate } from 'react-router-dom';
 import { Notify } from '../../reducer/Slices/Notification';
 
 export default function BasicAccordion() {
     const navigate = useNavigate()
+    const content = useSelector(state => state.ContentReducers)
     const [data, setData] = React.useState({
-        profile: null,
-        logo: null,
+        ...content
     })
     const dispatch = useDispatch()
-
+    console.log(content)
     function ChangeText(e) {
         const { name, value } = e.target
         setData(prev => {
