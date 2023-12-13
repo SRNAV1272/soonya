@@ -33,7 +33,19 @@ export default function Checkout() {
   const [data, setData] = React.useState({})
   const navigate = useNavigate(-1)
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    let next = false
+    if (activeStep === 0) setActiveStep(activeStep + 1);
+    Object.keys(data).forEach(item => {
+      if (data[item] === '') {
+        next = true
+        dispatch(Notify({ msg: `Please Enter a ${item} !` }));
+        return
+      }
+    })
+    if (!next && Object.keys(data).length === 8)
+      setActiveStep(activeStep + 1);
+
+    if (Object.keys(data).length < 8) dispatch(Notify({ msg: `Please fill all the Fields !` }));
   };
 
   React.useEffect(() => {
@@ -53,7 +65,7 @@ export default function Checkout() {
       }
     })
   }
-// eslint-disable-next-line
+  // eslint-disable-next-line
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
