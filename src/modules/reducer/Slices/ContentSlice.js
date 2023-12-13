@@ -60,7 +60,7 @@ export const GetCards = createAsyncThunk(
     }
 )
 
-export const ContentSlice = createSlice({
+const ContentSlice = createSlice({
     name: 'Content',
     initialState,
     reducers: {

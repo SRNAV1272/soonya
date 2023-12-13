@@ -39,7 +39,7 @@ export const PostOTP = createAsyncThunk(
     }
 )
 
-export const SignupSlice = createSlice({
+const SignupSlice = createSlice({
     name: 'Signup',
     initialState,
     extraReducers(builder) {

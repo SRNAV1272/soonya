@@ -4,6 +4,7 @@ import LoadingSlice from "./Slices/LoadingSlice";
 import Notification from "./Slices/Notification";
 import SignupSlice from "./Slices/SignupSlice";
 import SigninSlice from "./Slices/SigninSlice";
+import CartSlice from "./Slices/CartSlice";
 
 export const store = configureStore({
     reducer: combineReducers({
@@ -11,6 +12,7 @@ export const store = configureStore({
         LoadingReducer: LoadingSlice,
         NotificationReducer: Notification,
         SignUpReducer: SignupSlice,
-        SigninReducer: SigninSlice
+        SigninReducer: SigninSlice,
+        CartReducer: CartSlice
     })
 })

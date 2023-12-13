@@ -5,7 +5,7 @@ const initialState = {
     notify: false,
 }
 
-export const NotificationSlice = createSlice({
+const NotificationSlice = createSlice({
     name: 'Notification',
     initialState,
     reducers: {

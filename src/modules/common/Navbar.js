@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import logo from '../../images/Tapwave.png'
 import { heightLogo } from "../sizes/Sizes";
 
-
 export default function Navbar() {
     const navigate = useNavigate()
-
+    function Shop() {
+        navigate('/shop')
+    }
     return (
         <>
             <Grid
@@ -26,6 +27,9 @@ export default function Navbar() {
                 <Grid
                     item
                     sm={2}
+                    display={'flex'}
+                    justifyContent={'center'}
+                    alignItems={'center'}
                 >
                     <img
                         height={heightLogo}
@@ -46,7 +50,7 @@ export default function Navbar() {
                                 display={'flex'}
                                 justifyContent={'end'}
                             >
-                                <SwipeableTemporaryDrawer />
+                                <SwipeableTemporaryDrawer Shop={Shop} />
                             </Grid>
                         </>
 
@@ -59,7 +63,7 @@ export default function Navbar() {
                                 justifyContent={'end'}
                                 alignItems={'center'}
                             >
-                                <Navlink />
+                                <Navlink Shop={Shop} />
                             </Grid>
                             <Grid
                                 item

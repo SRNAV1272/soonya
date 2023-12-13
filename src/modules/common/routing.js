@@ -10,6 +10,9 @@ import Design from "../dashboard/pages/Design";
 import Cards from "../dashboard/pages/Cards";
 import OTP from "../dashboard/pages/OTP";
 import Auth from "../dashboard/layout/Auth";
+import Checkout from "../checkout/Checkout";
+import Album from "../general/Shop";
+import PageNotFound from "../dashboard/pages/PageNotFound";
 
 export const routes = [
     {
@@ -104,5 +107,17 @@ export const routes = [
     {
         path: 'dashboard/preview',
         element: <Cards />
+    },
+    {
+        path: 'checkout',
+        element: <Checkout />
+    },
+    {
+        path: 'shop',
+        element: <Album />
+    },
+    {
+        path: '*',
+        element: <PageNotFound />
     }
 ]

@@ -30,7 +30,7 @@ export const Login = createAsyncThunk(
     }
 )
 
-export const SigninSlice = createSlice({
+const SigninSlice = createSlice({
     name: 'Signin',
     initialState,
     extraReducers(builder) {

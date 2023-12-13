@@ -1,7 +1,8 @@
+import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 
-
-export default function Navlink() {
+export default function Navlink(props) {
     const links = ['Pricing', 'About Us']
     return (
         <>
@@ -26,11 +27,16 @@ export default function Navlink() {
                                 className={"Whisper"}
                             >
                                 {item}
-                            </NavLink>&emsp;&emsp;
+                            </NavLink>&emsp;
                         </>
                     )
                 })
             }
+            <Button
+                onClick={() => props.Shop()}
+            >
+                <ShoppingBagIcon sx={{ fontSize: '30px', color: '#516A8B' }} />
+            </Button>
         </>
     )
 }
