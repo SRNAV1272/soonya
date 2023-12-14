@@ -44,7 +44,7 @@ export default function BasicAccordion() {
             'Questrial',
             'Indie Flower'
         ]
-    console.log(content)
+
     React.useEffect(() => {
         dispatch(ContentUpdate(data)) // eslint-disable-next-line
     }, [data.style])
@@ -60,11 +60,19 @@ export default function BasicAccordion() {
 
     function Save() {
         try {
-            const newData = new FormData()
-            Object.keys(data).forEach(item => {
-                newData.set(`${item}`, data[item])
+            const formData = new FormData()
+            let updatedData = {
+                ...content
+            }
+            updatedData = {
+                ...updatedData,
+                ...data
+            }
+            console.log(updatedData)
+            Object.keys(updatedData).forEach(item => {
+                formData.set(`${item}`, updatedData[item])
             })
-            dispatch(UploadContent({ newData }, { dispatch }))
+            dispatch(UploadContent({ formData }, { dispatch }))
         } catch (e) {
             console.error(e)
             dispatch(Notify({ msg: 'Technical Error !' }))

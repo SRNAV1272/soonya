@@ -189,7 +189,6 @@ app.post('/card_url', Auth, async (req, res) => {
         const exists = await Exists(db, req.phone_no, req.password)
         if (exists) {
             const data = delete req.body._id    
-            console.log(req.body)
             const updatedResult = await db.collection('cards').updateOne(
                 { phone_no: req.phone_no, password: req.password },
                 {

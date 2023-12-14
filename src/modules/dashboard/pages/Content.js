@@ -13,10 +13,10 @@ import { URLUpdate } from "../../reducer/Slices/ContentSlice";
 export default function Content() {
     const dispatch = useDispatch()
     const { url } = useSelector(state => state.ContentReducers)
-    const [URL, setURL] = React.useState(url)
+    const [URL, setURL] = React.useState('')
 
     function UpdateURL() {
-        dispatch(URLUpdate({ url: `${url}${URL}` }))
+        dispatch(URLUpdate({ url: `https://tapewave.in/${URL}` }))
     }
     return (
         <>
@@ -40,6 +40,7 @@ export default function Content() {
                     </Typography>
                     <Paper
                         component="form"
+                        // color="secondary"
                         elevation={3}
                         sx={{ p: '2px 4px', display: 'flex', alignItems: 'center' }}
                     >
@@ -56,6 +57,7 @@ export default function Content() {
                             sx={{ ml: 1, flex: 1, fontFamily: 'Dosis', fontWeight: '600', color: '#747475' }}
                             placeholder="Customise url"
                             inputProps={{ 'aria-label': 'search google maps' }}
+                            disabled={url === undefined ? false : true}
                             onChange={(e) => {
                                 setURL(e.target.value)
                             }}
@@ -70,11 +72,11 @@ export default function Content() {
                         sx={{
                             border: 'none',
                             "& fieldset": { border: 'none' },
-                            fontFamily: 'Dosis'
-
+                            fontFamily: 'Dosis',
+                            fontWeight: 600
                         }}
                         fullWidth
-                        value={url}
+                        value={url === undefined ? "https://tapewave.in" : url}
                     />
                 </Grid>
                 <Grid

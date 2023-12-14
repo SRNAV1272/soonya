@@ -5,15 +5,16 @@ import { url } from "../../sizes/Sizes"
 import { Notify } from "./Notification"
 
 const initialState = {
+
 }
 
 export const UploadContent = createAsyncThunk(
     "Content/UploadContent",
-    async ({ newData }, { dispatch }) => {
+    async ({ formData }, { dispatch }) => {
         try {
             dispatch(Load(true))
-            console.log(newData.get('url'))
-            axios.post(`${url}/card_url`, newData, {
+            // console.log(formData.url)
+            axios.post(`${url}/card_url`, formData, {
                 headers: {
                     Authorization: `${localStorage.getItem('token')}`
                 }

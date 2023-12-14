@@ -41,8 +41,6 @@ export default function Mobile() {
         newLink.click();
     }
 
-    console.log(data)
-
     const handleClickOpen = () => {
         setOpen(true);
     };
@@ -264,6 +262,9 @@ export default function Mobile() {
                                 subheader={<Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600}>{data?.phone_no ? data?.phone_no : 'phone number'}</Typography>}
                             />
                             <CardContent>
+                                <Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600} variant="body2" color="text.secondary">
+                                    {data?.email ? data?.email : 'email'}
+                                </Typography>
                                 <Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600} variant="body2" color="text.secondary">
                                     {data?.address ? data?.address : 'address'}
                                 </Typography>

@@ -293,6 +293,9 @@ export default function Cards() {
                                     />
                                     <CardContent>
                                         <Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600} variant="body2" color="text.secondary">
+                                            {data?.email ? data?.email : 'email'}
+                                        </Typography>
+                                        <Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600} variant="body2" color="text.secondary">
                                             {data?.address ? data?.address : 'address'}
                                         </Typography>
                                         <Typography fontFamily={data?.style === '' ? 'Roboto' : data?.style} fontWeight={600} variant="body2" color="text.secondary">
