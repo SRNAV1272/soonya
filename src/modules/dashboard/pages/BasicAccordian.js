@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ContentUpdate, UploadContent } from '../../reducer/Slices/ContentSlice';
 import { useNavigate } from 'react-router-dom';
 import { Notify } from '../../reducer/Slices/Notification';
+import { h1 } from '../../sizes/Sizes';
 
 export default function BasicAccordion() {
     const navigate = useNavigate()
@@ -27,7 +28,26 @@ export default function BasicAccordion() {
         ...content
     })
     const dispatch = useDispatch()
+    const fontFamily =
+        [
+            'Whisper',
+            'Montserrat',
+            'Nova Square',
+            'Mulish',
+            'Dosis',
+            'Source Code Pro',
+            'Space Grotesk',
+            'Dancing Script',
+            'Exo 2',
+            'Ephesis',
+            'Shadows Into Light',
+            'Questrial',
+            'Indie Flower'
+        ]
     console.log(content)
+    React.useEffect(() => {
+        dispatch(ContentUpdate(data)) // eslint-disable-next-line
+    }, [data.style])
     function ChangeText(e) {
         const { name, value } = e.target
         setData(prev => {
@@ -36,10 +56,6 @@ export default function BasicAccordion() {
                 [name]: value
             }
         })
-    }
-
-    function Update() {
-        dispatch(ContentUpdate(data))
     }
 
     function Save() {
@@ -68,12 +84,6 @@ export default function BasicAccordion() {
                     onClick={() => navigate('/dashboard/preview')}
                 >
                     Preview
-                </Button>&emsp;
-                <Button
-                    variant='contained'
-                    onClick={() => Update()}
-                >
-                    Update
                 </Button>&emsp;
                 <Button
                     variant='contained'
@@ -488,6 +498,105 @@ export default function BasicAccordion() {
                                 error={data?.instagram === '' ? true : false}
                             />
                         </Grid>
+                    </Grid>
+                </AccordionDetails>
+            </Accordion>
+
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                >
+                    <Typography
+                        fontFamily={'Dosis'}
+                        fontWeight={600}
+                    >
+                        Font Style
+                    </Typography>
+                </AccordionSummary>
+                <Divider />
+                <AccordionDetails sx={{ my: 2 }}>
+                    <Grid
+                        container
+                        columnSpacing={1}
+                    // justifyContent={'space-around'}
+                    >
+                        <Grid
+                            item
+                            xs={4}
+                            sm={3}
+                            md={2}
+                            lg={1}
+                            p={1}
+                        >
+                            <Box
+                                px={1}
+                                py={2}
+                                border={`2px solid ${data?.style === '' ? '#4D77FA' : '#747475'}`}
+                                borderRadius={4}
+                                sx={{
+                                    cursor: 'pointer'
+                                }}
+                                onClick={() => setData(prev => {
+                                    return {
+                                        ...prev,
+                                        style: ''
+                                    }
+                                })}
+                            >
+                                <Typography
+                                    textAlign={'center'}
+                                    fontFamily={'Roboto'}
+                                    fontWeight={600}
+                                    fontSize={h1 / 2}
+                                >
+                                    none
+                                </Typography>
+                            </Box>
+                        </Grid>
+                        {
+                            fontFamily?.map((font, idx) => {
+                                return (
+                                    <>
+                                        <Grid
+                                            item
+                                            xs={4}
+                                            sm={3}
+                                            md={2}
+                                            lg={1}
+                                            p={1}
+                                            key={idx}
+                                        >
+                                            <Box
+                                                px={1}
+                                                py={2}
+                                                border={`2px solid ${data?.style === font ? '#4D77FA' : '#747475'}`}
+                                                borderRadius={4}
+                                                sx={{
+                                                    cursor: 'pointer'
+                                                }}
+                                                onClick={() => setData(prev => {
+                                                    return {
+                                                        ...prev,
+                                                        style: font
+                                                    }
+                                                })}
+                                            >
+                                                <Typography
+                                                    textAlign={'center'}
+                                                    fontFamily={font}
+                                                    fontWeight={600}
+                                                    fontSize={h1 / 2}
+                                                >
+                                                    Aa
+                                                </Typography>
+                                            </Box>
+                                        </Grid>
+                                    </>
+                                )
+                            })
+                        }
                     </Grid>
                 </AccordionDetails>
             </Accordion>

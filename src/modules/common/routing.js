@@ -6,7 +6,6 @@ import SignIn from "../general/Signin";
 import SignUp from "../general/Signup";
 import Footer from "./Footer";
 import Content from "../dashboard/pages/Content";
-import Design from "../dashboard/pages/Design";
 import Cards from "../dashboard/pages/Cards";
 import OTP from "../dashboard/pages/OTP";
 import Auth from "../dashboard/layout/Auth";
@@ -97,10 +96,6 @@ export const routes = [
             {
                 path: 'content',
                 element: <Content />
-            },
-            {
-                path: 'design',
-                element: <Design />
             }
         ]
     },

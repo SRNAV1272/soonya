@@ -12,8 +12,8 @@ import { URLUpdate } from "../../reducer/Slices/ContentSlice";
 
 export default function Content() {
     const dispatch = useDispatch()
-    const [URL, setURL] = React.useState('')
     const { url } = useSelector(state => state.ContentReducers)
+    const [URL, setURL] = React.useState(url)
 
     function UpdateURL() {
         dispatch(URLUpdate({ url: `${url}${URL}` }))

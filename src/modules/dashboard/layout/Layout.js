@@ -21,7 +21,7 @@ export default function DashboardLayout() {
         design: 1,
     }
     const dispatch = useDispatch()
-    const { name } = useSelector(state => state.SigninReducer)
+    const { name } = useSelector(state => state.ContentReducers)
     const path = useLocation()
     const [value, setValue] = React.useState(indecies[path.pathname.split('/')[2]]);
 
@@ -175,8 +175,8 @@ export default function DashboardLayout() {
                 >
                     <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                            <Tab label="Content" {...a11yProps(0)} onClick={() => navigate('/dashboard/content')} />
-                            <Tab label="Design" {...a11yProps(1)} onClick={() => navigate('/dashboard/design')} />
+                            <Tab label={<Typography fontFamily={'Dosis'} fontWeight={600}>Content</Typography>} {...a11yProps(0)} onClick={() => navigate('/dashboard/content')} />
+                            {/* <Tab label="Design" {...a11yProps(1)} onClick={() => navigate('/dashboard/design')} /> */}
                         </Tabs>
                     </Box>
                 </Grid>

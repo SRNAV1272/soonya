@@ -5,8 +5,6 @@ import { url } from "../../sizes/Sizes"
 import { Notify } from "./Notification"
 
 const initialState = {
-    name: 'Client',
-    url: 'https://tapewave.co.in/'
 }
 
 export const UploadContent = createAsyncThunk(
@@ -14,6 +12,7 @@ export const UploadContent = createAsyncThunk(
     async ({ newData }, { dispatch }) => {
         try {
             dispatch(Load(true))
+            console.log(newData.get('url'))
             axios.post(`${url}/card_url`, newData, {
                 headers: {
                     Authorization: `${localStorage.getItem('token')}`
@@ -22,6 +21,7 @@ export const UploadContent = createAsyncThunk(
                 .then(response => {
                     dispatch(Load(false))
                     dispatch(Notify({ msg: response.data?.msg }))
+                    dispatch(GetCards({}, { dispatch }))
                     console.log(response.data)
                 })
                 .catch(e => {
