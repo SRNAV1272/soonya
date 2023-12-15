@@ -4,12 +4,14 @@ import Grid from '@mui/material/Grid';
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { useSelector } from 'react-redux';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
+import { h1 } from '../sizes/Sizes';
 
 const defaultTheme = createTheme();
 const addresses = ['1 MUI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
 
 export default function Review() {
     const { cartItems } = useSelector(state => state.CartReducer)
+    const { address } = useSelector(state => state.CartReducer)
 
     function TotalAmount() {
         let total = 0
@@ -18,6 +20,8 @@ export default function Review() {
         })
         return total
     }
+
+    console.log(address)
 
     return (
         <React.Fragment>
@@ -104,8 +108,15 @@ export default function Review() {
                     <Typography variant="h6" gutterBottom sx={{ mt: 2, textDecoration: 'underline' }} fontFamily={'Dosis'} fontWeight={600}>
                         Shipping
                     </Typography>
-                    <Typography gutterBottom fontFamily={'Dosis'} fontWeight={600}>John Smith</Typography>
-                    <Typography gutterBottom fontFamily={'Dosis'} fontWeight={600}>{addresses.join(', ')}</Typography>
+                    <Typography gutterBottom fontFamily={'Dosis'} fontWeight={600}>
+                        {address?.firstName}&ensp;{address?.lastName}
+                    </Typography>
+                    <Typography gutterBottom fontFamily={'Dosis'} fontWeight={600}>
+                        {address?.address1},&ensp;{address?.address2}
+                    </Typography>
+                    <Typography gutterBottom fontFamily={'Dosis'} fontWeight={600}>
+                        {address?.city},&ensp;{address?.state},&ensp;{address?.zip},&ensp;{address?.country}
+                    </Typography>
                 </Grid>
                 <Grid item xs={12} md={4} display={'flex'} flexDirection={'column'} justifyContent={'center'} alignItems={'end'}>
                     <Typography variant="h6" gutterBottom sx={{ mt: 2, textDecoration: 'underline' }} fontFamily={'Dosis'} fontWeight={600}>
@@ -117,7 +128,7 @@ export default function Review() {
                         alignItems={'center'}
                     >
                         <CurrencyRupeeIcon />&ensp;
-                        <Typography gutterBottom fontFamily={'Dosis'} color={'#1565C0'} fontWeight={600}>{TotalAmount(cartItems)}</Typography>
+                        <Typography gutterBottom fontFamily={'Dosis'} fontSize={h1} color={'#1565C0'} fontWeight={600}>{TotalAmount(cartItems)}</Typography>
                     </Box>
                 </Grid>
             </Grid>

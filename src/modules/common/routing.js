@@ -12,6 +12,11 @@ import Auth from "../dashboard/layout/Auth";
 import Checkout from "../checkout/Checkout";
 import Album from "../general/Shop";
 import PageNotFound from "../dashboard/pages/PageNotFound";
+import TermsAndConditions from "../sizes/TermsAndConditions";
+import ShippingPolicies from "../sizes/ShippingPolicies";
+import Return from "../sizes/Return";
+import ReturnAndRefund from "../sizes/ReturnAndRefund";
+import PrivacyPolicy from "../sizes/PrivacyPolicy";
 
 export const routes = [
     {
@@ -114,5 +119,34 @@ export const routes = [
     {
         path: '*',
         element: <PageNotFound />
+    },
+    {
+        path: '',
+        element:
+            <Footer>
+                <Outlet />
+            </Footer>,
+        children: [
+            {
+                path: 'TermsAndConditions',
+                element: <TermsAndConditions />
+            },
+            {
+                path: 'ShippingPolicies',
+                element: <ShippingPolicies />
+            },
+            {
+                path: 'Return',
+                element: <Return />
+            },
+            {
+                path: 'ReturnAndRefund',
+                element: <ReturnAndRefund />
+            },
+            {
+                path: 'PrivacyPolicy',
+                element: <PrivacyPolicy />
+            }
+        ]
     }
 ]

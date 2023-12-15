@@ -20,17 +20,17 @@ import Cards from './Cards';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from '../reducer/Slices/Notification';
 import { CreateUser } from '../reducer/Slices/SignupSlice';
+import { UpdateDetails } from '../reducer/Slices/CartSlice';
 
 const steps = ["Cart Items", 'Shipping address', 'Review your order'];
 
 export default function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const { cartItems } = useSelector(state => state.CartReducer)
-
+  const { cartItems, address } = useSelector(state => state.CartReducer)
 
   const dispatch = useDispatch()
 
-  const [data, setData] = React.useState({})
+  const [data, setData] = React.useState({...address})
   const navigate = useNavigate(-1)
   const handleNext = () => {
     let next = false
@@ -42,10 +42,13 @@ export default function Checkout() {
         return
       }
     })
-    if (!next && Object.keys(data).length === 8)
-      setActiveStep(activeStep + 1);
-
-    if (Object.keys(data).length < 8) dispatch(Notify({ msg: `Please fill all the Fields !` }));
+    if (!next && Object.keys(data).length === 9 && activeStep === 1) {
+      handleSubmit()
+    }
+    if (Object.keys(data).length < 9) {
+      console.log(data)
+      dispatch(Notify({ msg: `Please fill all the Fields !` }));
+    }
   };
 
   React.useEffect(() => {
@@ -66,10 +69,8 @@ export default function Checkout() {
     })
   }
   // eslint-disable-next-line
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    if (!/^[6-9]\d{9}$/gi.test(data.get('phone_no'))) {
+  const handleSubmit = () => {
+    if (!/^[6-9]\d{9}$/gi.test(data['phone_no'])) {
       dispatch(Notify({ msg: 'Please Enter a Valid Number !' }))
       setData(prev => {
         return {
@@ -79,10 +80,8 @@ export default function Checkout() {
       })
       return
     }
-    if (data.get('firstName') === '' || data.get('firstName') === undefined) { dispatch(Notify({ msg: 'Please Enter a First Name !' })); return }
-    if (data.get('lastName') === '' || data.get('lastName') === undefined) { dispatch(Notify({ msg: 'Please Enter a Last Name !' })); return }
-
-    dispatch(CreateUser({ data, navigate }, { dispatch }))
+    dispatch(UpdateDetails(data))
+    setActiveStep(activeStep + 1);
   };
 
   return (
