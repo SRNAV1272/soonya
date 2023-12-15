@@ -87,6 +87,16 @@ export default function Album() {
                             }}
                             alt='logo'
                         />
+
+                        {/* <img
+                            src='http://drive.google.com/uc?export=view&id=1c8-TBeDNgxplKlxK2qJbP2tNgDJuaRhM'
+                            height={heightLogo * 1.2}                          
+                            style={{
+                                cursor: 'pointer',
+                                textAlign: 'center'
+                            }}
+                            alt='logo'  
+                        /> */}
                         <Box
                             display={'flex'}
                             justifyContent={'center'}
