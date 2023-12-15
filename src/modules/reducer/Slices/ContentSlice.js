@@ -44,7 +44,7 @@ export const GetCards = createAsyncThunk(
     async ({ }, { dispatch }) => {
         try {
             dispatch(Load(true))
-            const response = await axios.get(`${url}/card_data`, {
+            const response = await axios.post(`${url}/card_data`, {}, {
                 headers: {
                     Authorization: `${localStorage.getItem('token')}`
                 }

@@ -42,6 +42,7 @@ function generateOTP() {
 async function Auth(req, res, next) {
     try {
         let jwtData
+        console.log(req.headers.authorization)
         jwt.verify(req.headers.authorization, process.env.excryptSecret, (err, data) => {
             if (err) {
                 res.status(500)
@@ -74,7 +75,8 @@ const global_routes = [
     '/Pricing',
     '/signin',
     '/signup',
-    '/otp'
+    '/otp',
+    '/*'
 ]
 
 app.get(global_routes, (req, res) => {
@@ -188,7 +190,7 @@ app.post('/card_url', Auth, async (req, res) => {
 
         const exists = await Exists(db, req.phone_no, req.password)
         if (exists) {
-            const data = delete req.body._id    
+            const data = delete req.body._id
             const updatedResult = await db.collection('cards').updateOne(
                 { phone_no: req.phone_no, password: req.password },
                 {
@@ -220,19 +222,42 @@ app.post('/card_url', Auth, async (req, res) => {
     }
 })
 
-app.get('/card_data', Auth, async (req, res) => {
+app.post('/card_data', Auth, async (req, res) => {
     try {
 
         await client.connect()
         const db = client.db('tapwave')
         const { phone_no, password } = req
         const card = await db.collection('cards').find({ phone_no, password }).toArray()
-
+        console.log(phone_no, password)
         if (card.length > 0) {
             res.send(card)
         } else {
             res.status(500)
             res.send({ msg: 'Server Error !' })
+        }
+
+    } catch (e) {
+        console.error(e)
+        res.status(500)
+        res.send({ msg: 'Server Error !' })
+    }
+})
+
+app.post('/visiting_card_data', async (req, res) => {
+    try {
+        console.log(req.body.params)
+        const { params } = req.body
+        await client.connect()
+        const db = client.db('tapwave')
+        const url = `https://tapewave.in/${params}`
+        const card = await db.collection('cards').find({ url }).toArray()
+
+        if (card.length > 0) {
+            res.send(card)
+        } else {
+            res.status(500)
+            res.send({ msg: 'No Cards Found !' })
         }
 
     } catch (e) {

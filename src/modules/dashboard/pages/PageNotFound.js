@@ -60,7 +60,7 @@ export default function PageNotFound() {
                         }}
                     />
 
-                    <Button onClick={() => navigate(-1)} size="large" variant="contained" >
+                    <Button onClick={() => navigate('/signin')} size="large" variant="contained" >
                         Go to Home
                     </Button>
                 </Box>

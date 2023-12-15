@@ -17,6 +17,7 @@ import ShippingPolicies from "../sizes/ShippingPolicies";
 import Return from "../sizes/Return";
 import ReturnAndRefund from "../sizes/ReturnAndRefund";
 import PrivacyPolicy from "../sizes/PrivacyPolicy";
+import TapewaveCard from "../general/TapewaveCard";
 
 export const routes = [
     {
@@ -117,7 +118,11 @@ export const routes = [
         element: <Album />
     },
     {
-        path: '*',
+        path: 'error',
+        element: <PageNotFound />
+    },
+    {
+        path: ':id/*',
         element: <PageNotFound />
     },
     {
@@ -148,5 +153,9 @@ export const routes = [
                 element: <PrivacyPolicy />
             }
         ]
+    },
+    {
+        path: ':id',
+        element: <TapewaveCard />
     }
 ]

@@ -19,7 +19,6 @@ import { useNavigate } from 'react-router-dom';
 import Cards from './Cards';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from '../reducer/Slices/Notification';
-import { CreateUser } from '../reducer/Slices/SignupSlice';
 import { UpdateDetails } from '../reducer/Slices/CartSlice';
 
 const steps = ["Cart Items", 'Shipping address', 'Review your order'];

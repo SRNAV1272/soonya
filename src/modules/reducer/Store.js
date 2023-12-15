@@ -5,6 +5,7 @@ import Notification from "./Slices/Notification";
 import SignupSlice from "./Slices/SignupSlice";
 import SigninSlice from "./Slices/SigninSlice";
 import CartSlice from "./Slices/CartSlice";
+import TapeWaveCardSlice from "./Slices/TapeWaveCardSlice";
 
 export const store = configureStore({
     reducer: combineReducers({
@@ -13,6 +14,7 @@ export const store = configureStore({
         NotificationReducer: Notification,
         SignUpReducer: SignupSlice,
         SigninReducer: SigninSlice,
-        CartReducer: CartSlice
+        CartReducer: CartSlice,
+        TapewaveCardReducer: TapeWaveCardSlice
     })
 })
