@@ -6,8 +6,10 @@ import MailIcon from '@mui/icons-material/Mail';
 import ConnectWithoutContactIcon from '@mui/icons-material/ConnectWithoutContact';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { useNavigate } from "react-router-dom";
 
 export default function Copyright(props) {
+    const navigate = useNavigate()
     return (
         <>
             <Divider sx={{ p: 2 }} />
@@ -28,11 +30,12 @@ export default function Copyright(props) {
                         alignItems={'center'}
                     >
                         <Box>
-                            <Typography sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Term And Conditions</Typography>
-                            <Typography sx={{ cursor: 'pointer' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Return</Typography>
-                            <Typography sx={{ cursor: 'pointer' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Return And Refund</Typography>
-                            <Typography sx={{ cursor: 'pointer' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Privacy Policies</Typography>
-                            {/* <Typography fontSize={h1 / 1.5} fontFamily={'Dosis'} fontWeight={600}>Return</Typography> */}
+                        <Typography onClick={() => navigate('/')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Home</Typography>
+                            <Typography onClick={() => navigate('/TermsAndConditions')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Term And Conditions</Typography>
+                            <Typography onClick={() => navigate('/Return')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Return</Typography>
+                            <Typography onClick={() => navigate('/ReturnAndRefund')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Return And Refund</Typography>
+                            <Typography onClick={() => navigate('/PrivacyPolicy')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Privacy Policies</Typography>
+                            <Typography onClick={() => navigate('/ShippingPolicies')} sx={{ cursor: 'pointer', textDecoration: 'underline' }} fontSize={h1 / 2.5} fontFamily={'Dosis'} fontWeight={600}>Shipping Policies</Typography>
                         </Box>
                     </Grid>
                     <Grid
