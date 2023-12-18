@@ -14,6 +14,38 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import { Notify } from "../../reducer/Slices/Notification";
 import { GetCards } from "../../reducer/Slices/ContentSlice";
 
+
+function stringToColor(string) {
+    let hash = 0;
+    let i;
+    console.log(string)
+    /* eslint-disable no-bitwise */
+    for (i = 0; i < string.length; i += 1) {
+        hash = string.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (i = 0; i < 3; i += 1) {
+        const value = (hash >> (i * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+    /* eslint-enable no-bitwise */
+
+    return color;
+}
+
+function stringAvatar(name) {
+    console.log(name)
+    return {
+        sx: {
+            bgcolor: stringToColor(name),
+        },
+        children: `${name?.split(' ')[0][0]}${name?.split(' ').length > 1 && name?.split(' ')[1][0]}`,
+    };
+}
+
+
 export default function DashboardLayout() {
     const navigate = useNavigate()
     const indecies = {
@@ -35,7 +67,7 @@ export default function DashboardLayout() {
             dispatch(Notify({ msg: e.response.data.msg }))
         }
     }, [dispatch])
-
+    console.log(name)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -119,13 +151,12 @@ export default function DashboardLayout() {
                                     <ShoppingBagIcon color="action" />
                                 </Badge>&emsp;&emsp;&emsp;
                                 <Avatar
+                                    {...stringAvatar(name === undefined ? "Name" : name)}
                                     sx={{
                                         backgroundColor: '#5CE0E5',
-                                        p: 1
+                                        // p: 1
                                     }}
-                                >
-                                    {name?.substring(0, 2)}
-                                </Avatar>&emsp;
+                                />&emsp;
                                 <Typography
                                     fontFamily={'Dosis'}
                                     color='#4D77FA'

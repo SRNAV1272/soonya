@@ -229,7 +229,6 @@ app.post('/card_data', Auth, async (req, res) => {
         const db = client.db('tapwave')
         const { phone_no, password } = req
         const card = await db.collection('cards').find({ phone_no, password }).toArray()
-        console.log(phone_no, password)
         if (card.length > 0) {
             res.send(card)
         } else {
@@ -246,7 +245,6 @@ app.post('/card_data', Auth, async (req, res) => {
 
 app.post('/visiting_card_data', async (req, res) => {
     try {
-        console.log(req.body.params)
         const { params } = req.body
         await client.connect()
         const db = client.db('tapwave')
